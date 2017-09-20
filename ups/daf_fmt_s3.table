@@ -12,7 +12,7 @@ setupRequired(ndarray)
 setupRequired(daf_persistence)
 setupRequired(obs_base)
 setupRequired(python_boto3)
-setupRequired(python_moto)
+setupOptional(python_moto)
 
 # The following is boilerplate for all packages.
 # See Tech Note DMTN-001 for details on LSST_LIBRARY_PATH

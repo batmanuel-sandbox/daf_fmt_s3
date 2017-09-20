@@ -23,7 +23,11 @@
 
 import boto3
 import botocore
-from moto import mock_s3
+try:
+    from moto import mock_s3
+    HAS_MOTO = True
+except ImportError:
+    HAS_MOTO = False
 import os
 import pickle
 import tempfile
@@ -131,6 +135,8 @@ class BasicTestCase(unittest.TestCase):
 
     def setUp(self):
         if not LSST_USE_REAL_S3:
+            if not HAS_MOTO:
+                raise unittest.SkipTest("Moto S3 mock package is not installed.")
             self.mock = mock_s3()
             self.mock.start()
         self.cleanupBucketNames = []
